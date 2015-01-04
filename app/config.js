@@ -1,14 +1,14 @@
 require.config({
   // make components more sensible
-  // expose jquery 
+  // expose jquery
   paths: {
-    "components": "../bower_components",
+    //"components": "../bower_components",
     "jquery": "../bower_components/jquery/dist/jquery"
   }
 });
 
 if (!window.requireTestMode) {
-  require(['main'], function(){ });
+  require(['yEditor'], function(){ });
 }
 
 
