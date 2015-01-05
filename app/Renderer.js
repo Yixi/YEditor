@@ -6,12 +6,22 @@
  */
 define(
     [
+        "require",
         "jquery",
         "libs/eventEmitter",
         "libs/oop",
-        "layer/Text"
+        "layer/Text",
+        "layer/Cursor"
     ],
-    function ($,eventEmitter,oop,TextLayer) {
+    function (require,$,eventEmitter,oop,TextLayer,CursorLayer) {
+
+        var editorCss = require.toUrl('css/editor.css');
+        $("<link>")
+            .attr({ rel: "stylesheet",
+                type: "text/css",
+                href: editorCss
+            })
+            .appendTo("head");
 
         var Renderer = function (selector) {
             this.$container = $(selector);
@@ -24,6 +34,10 @@ define(
             this._textLayer = new TextLayer(this.$container);
             this.canvas = this._textLayer.$element;
 
+            this._cursorLayer = new CursorLayer(this.$container);
+
+            this.layers = [this._textLayer,this._cursorLayer];
+
         };
 
 
@@ -31,6 +45,26 @@ define(
 
             oop.implement(this,eventEmitter);
 
+
+
+            this.getContainerElement = function(){
+                return this.$container;
+            };
+
+            this.getContentElement = function(){
+                return this.canvas;
+            };
+
+            this.posToTextCoordinates = function(event){
+                var currentEle = event.target;
+                var currentTextInfo = this._textLayer.measureSizes(currentEle);
+
+                var eleCanvas = $(currentEle).offset();
+                
+
+                console.log(currentTextInfo);
+
+            };
 
         }).call(Renderer.prototype);
 

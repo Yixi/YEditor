@@ -1,0 +1,5 @@
+.yEditor-text-layer{
+    height: 100%;
+    z-index: 0;
+    cursor: text;
+}
