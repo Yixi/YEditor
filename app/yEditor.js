@@ -7,7 +7,14 @@
 //});
 
 
-define(function(require,exports,module){
-  var Editor = require('editor').Editor;
+define(
+    [
+        "Editor",
+        "Renderer"
 
+    ],function (Editor,Renderer) {
+
+        var editor = new Editor(new Renderer("#yEditor"))
+
+        console.log(editor);
 });

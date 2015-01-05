@@ -3,23 +3,28 @@
  */
 
 
-define(function(require,exports,module){
-  var oop = require('libs/oop');
+define(
+    [
+        "libs/oop",
+        "libs/eventEmitter"
+    ],
+    function (oop, eventEmitter) {
 
 
-  function Editor(render){
+        function Editor(renderer) {
 
-  }
-
-
-  (function(){
+            this.renderer = renderer;
+        }
 
 
-
-  }).call(Editor.prototype);
-
-
-  exports.Editor = Editor;
+        (function () {
 
 
-});
+        }).call(Editor.prototype);
+
+
+        return Editor;
+
+
+    }
+);
