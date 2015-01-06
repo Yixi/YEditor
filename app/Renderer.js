@@ -80,7 +80,8 @@ define(
 
                 return {
                     ele:currentEle,
-                    charIndex:charIndexInCurrentEle
+                    charIndex:charIndexInCurrentEle,
+                    charInfo:currentTextInfo
                 };
             };
 

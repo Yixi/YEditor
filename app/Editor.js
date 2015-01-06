@@ -67,6 +67,7 @@ define(
 
             this.onTextInput = function(text){
                 console.log(text);
+                var cursor = this.getCursorPosition();
             };
 
 

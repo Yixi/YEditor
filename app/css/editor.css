@@ -1,5 +1,20 @@
+.yEditor-layer {
+    z-index: 0;
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 100%;
+    width: 100%;
+}
+
 .yEditor-text-layer{
     height: 100%;
-    z-index: 0;
+    z-index: 2;
     cursor: text;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+.yEditor-cursor{
+    border-left: 2px solid red;
 }

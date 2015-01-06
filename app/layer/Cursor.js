@@ -38,6 +38,7 @@ define(
 
                 this.position = {
                     charIndex:pos.charIndex,
+                    charInfo:pos.charInfo,
                     ele:pos.ele
                 };
 
@@ -47,6 +48,20 @@ define(
 
             this.update = function(){
                 console.log('update');
+
+                var cursorLeft = Math.round(this.position.charIndex * this.position.charInfo.width) + $(this.position.ele).offset().left;
+                var cursorTop = $(this.position.ele).offset().top;
+
+
+                this.cursor.style.width = this.position.charInfo.width + 'px';
+                this.cursor.style.height = this.position.charInfo.height + 'px';
+
+                this.$element.append(this.cursor);
+                $(this.cursor).offset({left:cursorLeft,top:cursorTop});
+
+                console.log(cursorLeft,cursorTop);
+
+
             };
 
         }).call(Cursor.prototype);
