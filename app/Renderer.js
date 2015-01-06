@@ -11,9 +11,10 @@ define(
         "libs/eventEmitter",
         "libs/oop",
         "layer/Text",
-        "layer/Cursor"
+        "layer/Cursor",
+        "Loop"
     ],
-    function (require,$,eventEmitter,oop,TextLayer,CursorLayer) {
+    function (require,$,eventEmitter,oop,TextLayer,CursorLayer,Loop) {
 
         var editorCss = require.toUrl('css/editor.css');
         $("<link>")
@@ -38,10 +39,18 @@ define(
 
             this.layers = [this._textLayer,this._cursorLayer];
 
+
+
+            this._loop = new Loop(this._renderChanges.bind(this));
+
+
+
         };
 
 
         (function(){
+
+            this.CHANGE_CURSOR = 1;
 
             oop.implement(this,eventEmitter);
 
@@ -76,8 +85,20 @@ define(
             };
 
 
+            this._renderChanges = function(changes){
+                if(!changes) return;
+
+
+                if (changes & this.CHANGE_CURSOR){
+                    this._cursorLayer.update();
+                }
+            };
+
+
+
             this.updateCursor = function(pos){
                 this._cursorLayer.setCursor(pos);
+                this._loop.schedule(this.CHANGE_CURSOR);
             };
 
 

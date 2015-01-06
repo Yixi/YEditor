@@ -44,6 +44,11 @@ define(
             };
 
 
+
+            this.update = function(){
+                console.log('update');
+            };
+
         }).call(Cursor.prototype);
 
 
