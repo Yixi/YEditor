@@ -46,6 +46,10 @@ define(
             oop.implement(this,eventEmitter);
 
 
+            this.setDocument = function(doc){
+                this.doc = doc;
+                this._cursorLayer.setDocument(doc);
+            };
 
             this.getContainerElement = function(){
                 return this.$container;
@@ -59,10 +63,25 @@ define(
                 var currentEle = event.target;
                 var currentTextInfo = this._textLayer.measureSizes(currentEle);
 
-                var eleCanvas = $(currentEle).offset();
-                
+                var eleCanvasOffset = $(currentEle).offset();
 
-                console.log(currentTextInfo);
+                var charIndexInCurrentEle = Math.round((event.pageX - eleCanvasOffset.left) / currentTextInfo.width);
+
+                if(currentEle.textContent.length < charIndexInCurrentEle) charIndexInCurrentEle = 0;
+
+                return {
+                    ele:currentEle,
+                    charIndex:charIndexInCurrentEle
+                };
+            };
+
+
+            this.updateCursor = function(pos){
+                this._cursorLayer.setCursor(pos);
+            };
+
+
+            this.textToPosCoordinates = function(info){
 
             };
 

@@ -14,7 +14,7 @@ define(
 
     ],function (Editor,Renderer) {
 
-        var editor = new Editor(new Renderer("#yEditor"))
+        var editor = new Editor(new Renderer("#yEditor"));
 
         console.log(editor);
 });

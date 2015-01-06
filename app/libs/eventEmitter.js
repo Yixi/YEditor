@@ -14,20 +14,23 @@ define(function () {
         this._eventRegistry = this._eventRegistry || {};
         this._eventRegistry[eventName] = this._eventRegistry[eventName] || [];
 
-        if (this._eventRegistry.indexOf(hanlder) == -1) {
-            this._eventRegistry.push(hanlder);
+        if (this._eventRegistry[eventName].indexOf(hanlder) == -1) {
+            this._eventRegistry[eventName].push(hanlder);
         }
 
+        return this;
     };
 
     eventEmitter.off = function (eventName, hanlder) {
         this._eventRegistry = this._eventRegistry || {};
         if (!this._eventRegistry[eventName]) return;
 
-        var index = this._eventRegistry.indexOf(hanlder);
+        var index = this._eventRegistry[eventName].indexOf(hanlder);
         if (index !== 1) {
-            this._eventRegistry.splice(index, 1);
+            this._eventRegistry[eventName].splice(index, 1);
         }
+
+        return this;
     };
 
     eventEmitter.fire =
@@ -43,6 +46,7 @@ define(function () {
                 handlers[i](payload);
             }
 
+            return this;
         };
 
     return eventEmitter;
