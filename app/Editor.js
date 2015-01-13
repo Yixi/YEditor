@@ -68,6 +68,11 @@ define(
             this.onTextInput = function(text){
                 console.log(text);
                 var cursor = this.getCursorPosition();
+                console.log(cursor);
+
+                var end = this.doc.insert(cursor,text);
+                console.log(end);
+                this.moveCursorToPosition(end);
             };
 
 
