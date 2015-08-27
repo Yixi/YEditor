@@ -17,8 +17,11 @@ define(
             var text = document.createElement("textarea");
             var style = text.style;
             style.position = "absolute";
-            style.left = "-10000px";
-            style.top = "-10000px";
+            //style.left = "-10000px";
+            //style.top = "-10000px";
+
+            style.left = "-200px";
+
 
             $parentEl.append(text);
 
@@ -46,17 +49,27 @@ define(
                 text.select();
             }
 
+
+            $(text).on('compositionstart',function(e){
+                inCompostion = true;
+            });
+
+            $(text).on('compositionend',function(e){
+                inCompostion = false;
+                setTimeout(sendText,0);
+            });
+
             var onTextInput = function(e){
                 setTimeout(function(){
                     if(!inCompostion){
                         sendText();
                     }
-                },0);
+                },10);
             };
 
 
             $(text)
-                .on('keypress textInput paste propertychange',onTextInput)
+                .on('input',onTextInput)
                 .on('blur',function(){
                     if($.isFunction(host.onBlur)){
                         host.onBlur();
